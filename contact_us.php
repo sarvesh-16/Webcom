@@ -18,6 +18,35 @@ include "includes/common.php"
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
     </head>
+    <script type="text/javascript">
+        function myfunc(data)
+        {
+          
+           
+           var req = new XMLHttpRequest();
+           req.open("GET","http://localhost/webcom/response.php?datavalue="+data,true);
+           req.send();
+           
+           req.onreadystatechange=function(){
+               if(req.readyState==4 && req.status==200){
+                   document.getElementById('city').innerHTML=req.responseText;
+               }
+           }
+        }
+         function validation(){
+            var name= document.getElementById('name').value;
+            var email= document.getElementById('email').value;
+            if(name === ""){
+                document.getElementById('username').innerHTML="  ** Please fill this field";
+                return false;
+            }
+            
+            if(email === ""){
+                document.getElementById('emailname').innerHTML="  ** Please fill this field";
+                return false;
+            }
+         }
+    </script>
 
 <body style="padding-top: 50px;">
     
@@ -31,7 +60,8 @@ include "includes/common.php"
 		  <h1 class="title">LIVE SUPPORT</h1>
 		  <h3>24 hours|7 days a week| 365 days a year Live Technical Support</h3><br>
           <div>
-             <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters. There are many variations of passages of Lorel Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+             <p>Your feedback is valuable to us. Thank you for your time!
+Thanks for your comments! You make us better.</p>
           </div>
       </div>
         <div class="col-sm-2">
@@ -45,18 +75,37 @@ include "includes/common.php"
         <div class="contact-form">
             <h2>Get In Touch</h2>
 	           <div class="status alert alert-success" style="display: none"></div>
-                <form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="sendemail.php">
+                   
+               
+                <form id="main-contact-form" class="contact-form row" name="contact-form" method="post" onsubmit="return validation()" action="sendemail.php">
 				    
                     <div class="form-group col-sm-9">
-				        <input type="text" name="name" class="form-control" required="required" placeholder="Name" >
-				    </div>
+				        <input type="text" name="name" id="name" class="form-control" placeholder="Name" autocomplete="off">
+                                        <span id="username" class="text-danger"></span>
+                    </div>
 				    
                     <div class="form-group col-sm-9">
-				        <input type="email" name="email" class="form-control" required="required" placeholder="Email">
-				    </div>
-				    
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+			 <span id="emailname" class="text-danger"></span>	   
+                    </div>
                     <div class="form-group col-sm-9">
-				        <textarea name="message" id="message" required="required" class="form-control" rows="7" placeholder="Your Message Here"></textarea>
+                        <select class="form-control" onchange="myfunc(this.value)">
+                            <option>Select State</option>
+                            <option>Bihar</option>
+                            <option>Delhi</option>
+                            <option>Gujarat</option>
+                            <option>Maharashtra</option>
+                            <option>UP</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-9">
+                        <select class="form-control" id="city">
+                            <option>Select city</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-9">
+				        <textarea name="message" id="message" class="form-control" rows="7" placeholder="Your Message Here"></textarea>
 				    </div>
 				            
                     <div class="form-group col-sm-7">
@@ -70,25 +119,29 @@ include "includes/common.php"
 	       <div class="contact-info">
 	           <h2 class="title">Contact Info</h2>
 	               <address>
-				    <p>500 Lorem Ipsum Dolar Sit,</p>
-				    <p>22-56-3-5 Sit Amet, Lorem,</p>
-				    <p>USA</p>
-				    <p>Phone:(00) 222 555 3333</p>
-				    <p>Fax:(000) 222 55 33 6</p>
-				    <p>Email: info@estore.com</p>
+				    <p>Royal Appartment ,</p>
+				    <p>Garden City, Mumbai,</p>
+				    <p>INDIA</p>
+				    <p>Phone:(+91) 222 555 3333</p>
+				    <p>Fax: 222 55 33 6</p>
+				    <p>Email: ecomm@estore.com</p>
 	               </address>
 	               
 	            <div><h2 class="title">Follow Us On&#58;</h2>
                    <a href="http://www.facebook.com/estore" target="_blank"><img src="./img/logofb.png" alt="fb logo" style="width:30px; height:30px; border:0"></a>
-                   <a href="http://www.twitter.com/estore" target="_blank"><img src="./img/logotwitter.png" alt="twitter logo" style="width:30px; height:30px; border:0"></a>
+                   <a href="http://www.twitter.com/estore" target="_blank"><img src="./img/logotwitter.png" alt="twitter logo" style="width:30px; height:30px; border:0 "></a>
                </div>
             </div>
         </div>
     </div>
 </div>
+    
 
 
-
-      <?php include 'includes/footer.php'; ?>
-    </body>
+      
+    
+    
+    <?php include 'includes/footer.php'; ?>
+    
+   </body>
 </html>
